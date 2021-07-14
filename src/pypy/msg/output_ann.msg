@@ -1,0 +1,6 @@
+float32 px_act_minicar
+float32 py_act_minicar 
+float32 psi_act_minicar
+float32 v_act_minicar
+float32 cte_act_minicar
+float32 epsi_act_minicar
