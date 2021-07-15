@@ -9,8 +9,7 @@ import numpy as np
 import pandas as pd
 
 a = 0
-X_test = np.array([[0, 0, 0, 0, 0, 0, 0]],dtype=float);
-#Y_pred = np.array([[0, 0, 0, 0, 0, 0]]);
+
 
 pub = rospy.Publisher('minicar/output_ann', output_ann, queue_size=10)
 data_predict = output_ann()
@@ -22,23 +21,28 @@ model_new = tf.keras.models.Sequential([
 	tf.keras.layers.Dense(512, activation=tf.nn.relu),
 	tf.keras.layers.Dense(512, activation=tf.nn.relu),
 	tf.keras.layers.Dense(6, activation= tf.keras.activations.linear)
-    ])
+   ])
 model_new.compile(optimizer= tf.keras.optimizers.Adam(learning_rate =0.001),loss='mean_squared_error',metrics=['accuracy'])
 model_new.load_weights('../rospy_tutorial/documents/ANN_hypharos/model_hypharos')
+#model_new.summary()
 
 def callback(data):
 	#v, dt, steering, Lf, throttle, cte, epsi
-	X_test[0,0] = data.v_minicar
-	X_test[0,1] = data.dt_minicar
-	X_test[0,2] = data.steering_minicar
-	X_test[0,3] = data.Lf_minicar
-	X_test[0,4] = data.throttle_minicar
-	X_test[0,5] = data.cte_minicar
-	X_test[0,6] = data.epsi_minicar
+	X_haha = np.array([[0, 0, 0, 0, 0, 0, 0]],dtype=float);
+	Y_haha = np.array([[0, 0, 0, 0, 0, 0]],dtype=float);
 	
-	#print('input:', X_test)
+	X_haha[0,0] = 0.42146
+	X_haha[0,1] = 0.1
+	X_haha[0,2] = 0.35197
+	X_haha[0,3] = 0.25
+	X_haha[0,4] = 1
+	X_haha[0,5] = 0.07659
+	X_haha[0,6] = 0.5903
+	
+	#print('input:', X_haha)
+	#rospy.loginfo("haha")
 	#https://www.tensorflow.org/tutorials/keras/regression
-	Y_pred = model_new.predict(X_test[0,0:5])
+	#Y_haha = model_new.predict(X_haha)
 	
 	#px_act, py_act, psi_act, v_act, cte_act, epsi_act
 	#data_predict.px_act_minicar 	= Y_pred[0,0]
@@ -48,14 +52,15 @@ def callback(data):
 	#data_predict.cte_act_minicar	= Y_pred[0,4]
 	#data_predict.epsi_act_minicar	= Y_pred[0,5]
 	#pub.publish(data_predict)
+	rospy.sleep(5)
 	
 def haha():
 	rospy.init_node('ann_minicar', anonymous=True)
 	
 	while not rospy.is_shutdown():
 		rospy.Subscriber("minicar/ann_input", input_ann, callback)
-		#rospy.loginfo("haha")
-		rospy.sleep(0.1)
+		#rospy.loginfo("hehe")
+		rospy.sleep(5)
   
 if __name__ == '__main__':
 	try:
