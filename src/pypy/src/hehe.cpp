@@ -10,7 +10,9 @@ void status_cb(const pypy::output_ann& predict);
 ros::Publisher pub;
 pypy::input_ann wkwk;
 
-double px_act,py_act,psi_act,v_act,cte_act,epsi_act;
+ros::Subscriber sub;
+
+double px_act_predict,py_act_predict,psi_act_predict,v_act_predict,cte_act_predict,epsi_act_predict;
 
 int main(int argc, char **argv)
 {
@@ -18,7 +20,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 
 	pub	= n.advertise<pypy::input_ann>("minicar/input_ann", 10);
-	ros::Subscriber sub	= n.subscribe("minicar/output_ann", 10, status_cb);
+	sub	= n.subscribe("minicar/output_ann", 10, status_cb);
 	 
 	while(ros::ok()){
 		sleep(0.1);
@@ -31,11 +33,11 @@ int main(int argc, char **argv)
 		wkwk.epsi_minicar 		= 0.5903;
 		
 		pub.publish(wkwk);	
-		//cout<<"[CPP] I send "<<wkwk<<endl;
+		cout<<"[CPP] I send "<<wkwk<<endl;
 		ros::spinOnce();
 		//cout<<"hehe"<<endl;
 		sleep(0.1);
-		cout<<"[CPP] I got "<<px_act<<endl<<py_act<<endl<<psi_act<<endl<<v_act<<endl<<cte_act<<endl<<epsi_act<<endl<<endl;
+		cout<<"[CPP] I got "<<px_act_predict<<endl<<py_act_predict<<endl<<psi_act_predict<<endl<<v_act_predict<<endl<<cte_act_predict<<endl<<epsi_act_predict<<endl<<endl;
 	}
 	//0.42146/0.1/0.35197/0.25/1/0.07659/0.5903	
 	//0.04215/0/0.05934/0.52146/0.10005/-0.53096
@@ -43,10 +45,10 @@ int main(int argc, char **argv)
 }
 
 void status_cb(const pypy::output_ann& predict){
-	px_act	= predict.px_act_minicar; 	
-	py_act	= predict.py_act_minicar;		 
-	psi_act	= predict.psi_act_minicar; 	
-	v_act	= predict.v_act_minicar; 		
-	cte_act	= predict.cte_act_minicar;	
-	epsi_act= predict.epsi_act_minicar;	
+	px_act_predict	= predict.px_act_minicar; 	
+	py_act_predict	= predict.py_act_minicar;		 
+	psi_act_predict	= predict.psi_act_minicar; 	
+	v_act_predict	= predict.v_act_minicar; 		
+	cte_act_predict	= predict.cte_act_minicar;	
+	epsi_act_predict= predict.epsi_act_minicar;	
 }

@@ -154,7 +154,7 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-catkin_install_python(PROGRAMS scripts/talker.py scripts/listener.py scripts/process.py scripts/ann_minicar.py
+catkin_install_python(PROGRAMS script/talker.py script/listener.py script/process.py script/ann_minicar.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
