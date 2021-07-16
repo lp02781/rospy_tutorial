@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void status_cb(const pypy::output_ann& predict);
+void ann_cb(const pypy::output_ann& predict);
 
 ros::Publisher pub;
 pypy::input_ann wkwk;
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 
 	pub	= n.advertise<pypy::input_ann>("minicar/input_ann", 10);
-	sub	= n.subscribe("minicar/output_ann", 10, status_cb);
+	sub	= n.subscribe("minicar/output_ann", 10, ann_cb);
 	 
 	while(ros::ok()){
 		sleep(0.1);
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 
 }
 
-void status_cb(const pypy::output_ann& predict){
+void ann_cb(const pypy::output_ann& predict){
 	px_act_predict	= predict.px_act_minicar; 	
 	py_act_predict	= predict.py_act_minicar;		 
 	psi_act_predict	= predict.psi_act_minicar; 	
