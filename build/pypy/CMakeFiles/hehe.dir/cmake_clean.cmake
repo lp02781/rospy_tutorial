@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/hehe.dir/src/hehe.cpp.o"
-  "/home/mfikih15/rospy_tutorial/devel/lib/pypy/hehe.pdb"
   "/home/mfikih15/rospy_tutorial/devel/lib/pypy/hehe"
+  "/home/mfikih15/rospy_tutorial/devel/lib/pypy/hehe.pdb"
+  "CMakeFiles/hehe.dir/src/hehe.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

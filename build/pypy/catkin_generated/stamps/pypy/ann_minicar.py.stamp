@@ -10,7 +10,6 @@ import pandas as pd
 
 a = 0
 
-
 pub = rospy.Publisher('minicar/output_ann', output_ann, queue_size=10)
 data_predict = output_ann()
 
@@ -42,23 +41,23 @@ def callback(data):
 	#print('input:', X_haha)
 	#rospy.loginfo("haha")
 	#https://www.tensorflow.org/tutorials/keras/regression
-	#Y_haha = model_new.predict(X_haha)
+	Y_haha = model_new.predict(X_haha)
 	
 	#px_act, py_act, psi_act, v_act, cte_act, epsi_act
-	#data_predict.px_act_minicar 	= Y_pred[0,0]
-	#data_predict.py_act_minicar		= Y_pred[0,1] 
-	#data_predict.psi_act_minicar 	= Y_pred[0,2]
-	#data_predict.v_act_minicar 		= Y_pred[0,3]
-	#data_predict.cte_act_minicar	= Y_pred[0,4]
-	#data_predict.epsi_act_minicar	= Y_pred[0,5]
-	#pub.publish(data_predict)
+	data_predict.px_act_minicar 	= Y_haha[0,0]
+	data_predict.py_act_minicar		= Y_haha[0,1] 
+	data_predict.psi_act_minicar 	= Y_haha[0,2]
+	data_predict.v_act_minicar 		= Y_haha[0,3]
+	data_predict.cte_act_minicar	= Y_haha[0,4]
+	data_predict.epsi_act_minicar	= Y_haha[0,5]
+	pub.publish(data_predict)
 	rospy.sleep(5)
 	
 def haha():
 	rospy.init_node('ann_minicar', anonymous=True)
 	
 	while not rospy.is_shutdown():
-		rospy.Subscriber("minicar/ann_input", input_ann, callback)
+		rospy.Subscriber("minicar/input_ann", input_ann, callback)
 		#rospy.loginfo("hehe")
 		rospy.sleep(5)
   

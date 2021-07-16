@@ -2,7 +2,7 @@
 
 message(STATUS "pypy: 2 messages, 0 services")
 
-set(MSG_I_FLAGS "-Ipypy:/home/mfikih15/rospy_tutorial/src/pypy/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg;-Isensor_msgs:/opt/ros/melodic/share/sensor_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/melodic/share/geometry_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Ipypy:/home/mfikih15/rospy_tutorial/src/pypy/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg;-Isensor_msgs:/opt/ros/noetic/share/sensor_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -34,13 +34,13 @@ add_custom_target(_pypy_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/pypy
 )
 _generate_msg_cpp(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/pypy
@@ -75,13 +75,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS pypy_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/pypy
 )
 _generate_msg_eus(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/pypy
@@ -116,13 +116,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS pypy_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/pypy
 )
 _generate_msg_lisp(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/pypy
@@ -157,13 +157,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS pypy_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/pypy
 )
 _generate_msg_nodejs(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/pypy
@@ -198,13 +198,13 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS pypy_generate_messages_nodejs)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy
 )
 _generate_msg_py(pypy
-  "/home/mfikih15/rospy_tutorial/src/pypy/msg/input_ann.msg"
+  "/home/mfikih15/rospy_tutorial/src/pypy/msg/output_ann.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy
@@ -295,7 +295,7 @@ if(TARGET sensor_msgs_generate_messages_nodejs)
 endif()
 
 if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy)
-  install(CODE "execute_process(COMMAND \"/usr/bin/python2\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy\")")
+  install(CODE "execute_process(COMMAND \"/usr/bin/python3\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy\")")
   # install generated code
   install(
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/pypy

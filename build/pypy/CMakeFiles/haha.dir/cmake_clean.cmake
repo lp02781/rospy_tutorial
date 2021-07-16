@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/haha.dir/src/haha.cpp.o"
-  "/home/mfikih15/rospy_tutorial/devel/lib/pypy/haha.pdb"
   "/home/mfikih15/rospy_tutorial/devel/lib/pypy/haha"
+  "/home/mfikih15/rospy_tutorial/devel/lib/pypy/haha.pdb"
+  "CMakeFiles/haha.dir/src/haha.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

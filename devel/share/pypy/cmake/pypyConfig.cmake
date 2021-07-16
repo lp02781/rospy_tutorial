@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/mfikih15/rospy_tutorial/devel/lib;/home/mfikih15/rospy_tutorial/devel/lib;/home/mfikih15/dl_minicar/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/mfikih15/rospy_tutorial/devel/lib;/home/mfikih15/rospy_tutorial/devel/lib;/home/mfikih15/minicar_test/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -211,7 +211,7 @@ foreach(depend ${depends})
   _unpack_libraries_with_build_configuration(pypy_LIBRARIES ${pypy_LIBRARIES})
 
   _list_append_unique(pypy_LIBRARY_DIRS ${${pypy_dep}_LIBRARY_DIRS})
-  list(APPEND pypy_EXPORTED_TARGETS ${${pypy_dep}_EXPORTED_TARGETS})
+  _list_append_deduplicate(pypy_EXPORTED_TARGETS ${${pypy_dep}_EXPORTED_TARGETS})
 endforeach()
 
 set(pkg_cfg_extras "pypy-msg-extras.cmake")
