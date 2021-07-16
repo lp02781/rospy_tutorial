@@ -30,13 +30,13 @@ def callback(data):
 	X_haha = np.array([[0, 0, 0, 0, 0, 0, 0]],dtype=float);
 	Y_haha = np.array([[0, 0, 0, 0, 0, 0]],dtype=float);
 	
-	X_haha[0,0] = 0.42146
-	X_haha[0,1] = 0.1
-	X_haha[0,2] = 0.35197
-	X_haha[0,3] = 0.25
-	X_haha[0,4] = 1
-	X_haha[0,5] = 0.07659
-	X_haha[0,6] = 0.5903
+	X_haha[0,0] = data.v_minicar
+	X_haha[0,1] = data.dt_minicar
+	X_haha[0,2] = data.steering_minicar
+	X_haha[0,3] = data.Lf_minicar
+	X_haha[0,4] = data.throttle_minicar
+	X_haha[0,5] = data.cte_minicar
+	X_haha[0,6] = data.epsi_minicar
 	
 	#print('input:', X_haha)
 	#rospy.loginfo("haha")
