@@ -23,11 +23,12 @@ model_new.compile(optimizer= tf.keras.optimizers.Adam(learning_rate =0.001),loss
 model_new.load_weights('../rospy_tutorial/documents/ANN_hypharos/model_hypharos')
 #model_new.summary()
 
+X_haha = np.array([[0, 0, 0, 0, 0, 0, 0]],dtype=float);
+Y_haha = np.array([[0, 0, 0, 0, 0, 0]],dtype=float);
+
 def callback(data):
 	#v, dt, steering, Lf, throttle, cte, epsi
-		X_haha = np.array([[0, 0, 0, 0, 0, 0, 0]],dtype=float);
-		Y_haha = np.array([[0, 0, 0, 0, 0, 0]],dtype=float);
-		rospy.loginfo("################################################hoho")
+		#rospy.loginfo("################################################hoho")
 #if data.number_input==number_data+1 :
 		X_haha[0,0] = data.v_minicar
 		X_haha[0,1] = data.dt_minicar
@@ -37,8 +38,8 @@ def callback(data):
 		X_haha[0,5] = data.cte_minicar
 		X_haha[0,6] = data.epsi_minicar
 	
-		print('input:', X_haha)
-		rospy.loginfo("##############################################haha")
+		#print('input:', X_haha)
+		#rospy.loginfo("##############################################haha")
 		#https://www.tensorflow.org/tutorials/keras/regression
 		Y_haha = model_new.predict(X_haha)
 	
@@ -52,7 +53,7 @@ def callback(data):
 		data_predict.epsi_act_minicar	= Y_haha[0,5]
 		pub.publish(data_predict)
 	
-		rospy.loginfo("######################################################hehe")
+		#rospy.loginfo("######################################################hehe")
 		rospy.sleep(1)
 	
 def haha():

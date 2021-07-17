@@ -35,15 +35,15 @@ int main(int argc, char **argv)
 		wkwk.epsi_minicar 		= 0.5903;
 		
 		pub.publish(wkwk);	
-		cout<<"[CPP] I send "<<wkwk<<endl;
+		//cout<<"[CPP] I send "<<wkwk<<endl;
 		ros::spinOnce();
-		/*while(number_predict != number_data){
-			cout<<"number_predict: "<<number_predict<<endl;
-			ros::spinOnce();
-			sleep(1);
-		}*/
+		//while(number_predict != number_data){
+		//		ros::spinOnce();
+		//}
+		cout<< number_predict<<endl;
+		cout<< number_data<<endl;
 		number_data++;
-		cout<<"[CPP] I got "<<number_predict<<endl<<px_act_predict<<endl<<py_act_predict<<endl<<psi_act_predict<<endl<<v_act_predict<<endl<<cte_act_predict<<endl<<epsi_act_predict<<endl<<endl;
+		//cout<<"[CPP] I got "<<number_predict<<endl<<px_act_predict<<endl<<py_act_predict<<endl<<psi_act_predict<<endl<<v_act_predict<<endl<<cte_act_predict<<endl<<epsi_act_predict<<endl<<endl;
 		//cout<<"hehe"<<endl;
 		sleep(1);
 	}
