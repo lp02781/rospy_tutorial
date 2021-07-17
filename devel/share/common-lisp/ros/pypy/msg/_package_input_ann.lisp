@@ -1,5 +1,7 @@
 (cl:in-package pypy-msg)
-(cl:export '(V_MINICAR-VAL
+(cl:export '(NUMBER_INPUT-VAL
+          NUMBER_INPUT
+          V_MINICAR-VAL
           V_MINICAR
           DT_MINICAR-VAL
           DT_MINICAR

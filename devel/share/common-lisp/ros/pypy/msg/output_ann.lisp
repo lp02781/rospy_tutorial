@@ -7,7 +7,12 @@
 ;//! \htmlinclude output_ann.msg.html
 
 (cl:defclass <output_ann> (roslisp-msg-protocol:ros-message)
-  ((px_act_minicar
+  ((number_output
+    :reader number_output
+    :initarg :number_output
+    :type cl:integer
+    :initform 0)
+   (px_act_minicar
     :reader px_act_minicar
     :initarg :px_act_minicar
     :type cl:float
@@ -47,6 +52,11 @@
   (cl:unless (cl:typep m 'output_ann)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name pypy-msg:<output_ann> is deprecated: use pypy-msg:output_ann instead.")))
 
+(cl:ensure-generic-function 'number_output-val :lambda-list '(m))
+(cl:defmethod number_output-val ((m <output_ann>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader pypy-msg:number_output-val is deprecated.  Use pypy-msg:number_output instead.")
+  (number_output m))
+
 (cl:ensure-generic-function 'px_act_minicar-val :lambda-list '(m))
 (cl:defmethod px_act_minicar-val ((m <output_ann>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader pypy-msg:px_act_minicar-val is deprecated.  Use pypy-msg:px_act_minicar instead.")
@@ -78,6 +88,12 @@
   (epsi_act_minicar m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <output_ann>) ostream)
   "Serializes a message object of type '<output_ann>"
+  (cl:let* ((signed (cl:slot-value msg 'number_output)) (unsigned (cl:if (cl:< signed 0) (cl:+ signed 4294967296) signed)))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) unsigned) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) unsigned) ostream)
+    )
   (cl:let ((bits (roslisp-utils:encode-single-float-bits (cl:slot-value msg 'px_act_minicar))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
@@ -111,6 +127,12 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <output_ann>) istream)
   "Deserializes a message object of type '<output_ann>"
+    (cl:let ((unsigned 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) unsigned) (cl:read-byte istream))
+      (cl:setf (cl:slot-value msg 'number_output) (cl:if (cl:< unsigned 2147483648) unsigned (cl:- unsigned 4294967296))))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -157,18 +179,19 @@
   "pypy/output_ann")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<output_ann>)))
   "Returns md5sum for a message object of type '<output_ann>"
-  "8d2434489c16b0e308740b03741b3d7d")
+  "721db5ffb080a547f879965214de1e32")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'output_ann)))
   "Returns md5sum for a message object of type 'output_ann"
-  "8d2434489c16b0e308740b03741b3d7d")
+  "721db5ffb080a547f879965214de1e32")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<output_ann>)))
   "Returns full string definition for message of type '<output_ann>"
-  (cl:format cl:nil "float32 px_act_minicar~%float32 py_act_minicar ~%float32 psi_act_minicar~%float32 v_act_minicar~%float32 cte_act_minicar~%float32 epsi_act_minicar~%~%~%"))
+  (cl:format cl:nil "int32 number_output~%float32 px_act_minicar~%float32 py_act_minicar ~%float32 psi_act_minicar~%float32 v_act_minicar~%float32 cte_act_minicar~%float32 epsi_act_minicar~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'output_ann)))
   "Returns full string definition for message of type 'output_ann"
-  (cl:format cl:nil "float32 px_act_minicar~%float32 py_act_minicar ~%float32 psi_act_minicar~%float32 v_act_minicar~%float32 cte_act_minicar~%float32 epsi_act_minicar~%~%~%"))
+  (cl:format cl:nil "int32 number_output~%float32 px_act_minicar~%float32 py_act_minicar ~%float32 psi_act_minicar~%float32 v_act_minicar~%float32 cte_act_minicar~%float32 epsi_act_minicar~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <output_ann>))
   (cl:+ 0
+     4
      4
      4
      4
@@ -179,6 +202,7 @@
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <output_ann>))
   "Converts a ROS message object to a list"
   (cl:list 'output_ann
+    (cl:cons ':number_output (number_output msg))
     (cl:cons ':px_act_minicar (px_act_minicar msg))
     (cl:cons ':py_act_minicar (py_act_minicar msg))
     (cl:cons ':psi_act_minicar (psi_act_minicar msg))

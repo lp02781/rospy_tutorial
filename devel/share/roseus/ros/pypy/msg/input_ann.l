@@ -14,11 +14,12 @@
 
 (defclass pypy::input_ann
   :super ros::object
-  :slots (_v_minicar _dt_minicar _steering_minicar _Lf_minicar _throttle_minicar _cte_minicar _epsi_minicar ))
+  :slots (_number_input _v_minicar _dt_minicar _steering_minicar _Lf_minicar _throttle_minicar _cte_minicar _epsi_minicar ))
 
 (defmethod pypy::input_ann
   (:init
    (&key
+    ((:number_input __number_input) 0)
     ((:v_minicar __v_minicar) 0.0)
     ((:dt_minicar __dt_minicar) 0.0)
     ((:steering_minicar __steering_minicar) 0.0)
@@ -28,6 +29,7 @@
     ((:epsi_minicar __epsi_minicar) 0.0)
     )
    (send-super :init)
+   (setq _number_input (round __number_input))
    (setq _v_minicar (float __v_minicar))
    (setq _dt_minicar (float __dt_minicar))
    (setq _steering_minicar (float __steering_minicar))
@@ -36,6 +38,9 @@
    (setq _cte_minicar (float __cte_minicar))
    (setq _epsi_minicar (float __epsi_minicar))
    self)
+  (:number_input
+   (&optional __number_input)
+   (if __number_input (setq _number_input __number_input)) _number_input)
   (:v_minicar
    (&optional __v_minicar)
    (if __v_minicar (setq _v_minicar __v_minicar)) _v_minicar)
@@ -60,6 +65,8 @@
   (:serialization-length
    ()
    (+
+    ;; int32 _number_input
+    4
     ;; float64 _v_minicar
     8
     ;; float64 _dt_minicar
@@ -79,6 +86,8 @@
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
+     ;; int32 _number_input
+       (write-long _number_input s)
      ;; float64 _v_minicar
        (sys::poke _v_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _dt_minicar
@@ -97,6 +106,8 @@
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
+   ;; int32 _number_input
+     (setq _number_input (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; float64 _v_minicar
      (setq _v_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _dt_minicar
@@ -115,10 +126,11 @@
    self)
   )
 
-(setf (get pypy::input_ann :md5sum-) "093ce1ce8a57c4f6a17d4a1eac97b0d8")
+(setf (get pypy::input_ann :md5sum-) "bc154e06ce5183a6baa17b949413ded1")
 (setf (get pypy::input_ann :datatype-) "pypy/input_ann")
 (setf (get pypy::input_ann :definition-)
-      "float64 v_minicar
+      "int32 number_input
+float64 v_minicar
 float64 dt_minicar
 float64 steering_minicar
 float64 Lf_minicar
@@ -130,6 +142,6 @@ float64 epsi_minicar
 
 
 
-(provide :pypy/input_ann "093ce1ce8a57c4f6a17d4a1eac97b0d8")
+(provide :pypy/input_ann "bc154e06ce5183a6baa17b949413ded1")
 
 

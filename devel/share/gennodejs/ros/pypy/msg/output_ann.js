@@ -18,6 +18,7 @@ class output_ann {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.number_output = null;
       this.px_act_minicar = null;
       this.py_act_minicar = null;
       this.psi_act_minicar = null;
@@ -26,6 +27,12 @@ class output_ann {
       this.epsi_act_minicar = null;
     }
     else {
+      if (initObj.hasOwnProperty('number_output')) {
+        this.number_output = initObj.number_output
+      }
+      else {
+        this.number_output = 0;
+      }
       if (initObj.hasOwnProperty('px_act_minicar')) {
         this.px_act_minicar = initObj.px_act_minicar
       }
@@ -67,6 +74,8 @@ class output_ann {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type output_ann
+    // Serialize message field [number_output]
+    bufferOffset = _serializer.int32(obj.number_output, buffer, bufferOffset);
     // Serialize message field [px_act_minicar]
     bufferOffset = _serializer.float32(obj.px_act_minicar, buffer, bufferOffset);
     // Serialize message field [py_act_minicar]
@@ -86,6 +95,8 @@ class output_ann {
     //deserializes a message object of type output_ann
     let len;
     let data = new output_ann(null);
+    // Deserialize message field [number_output]
+    data.number_output = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [px_act_minicar]
     data.px_act_minicar = _deserializer.float32(buffer, bufferOffset);
     // Deserialize message field [py_act_minicar]
@@ -102,7 +113,7 @@ class output_ann {
   }
 
   static getMessageSize(object) {
-    return 24;
+    return 28;
   }
 
   static datatype() {
@@ -112,12 +123,13 @@ class output_ann {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8d2434489c16b0e308740b03741b3d7d';
+    return '721db5ffb080a547f879965214de1e32';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    int32 number_output
     float32 px_act_minicar
     float32 py_act_minicar 
     float32 psi_act_minicar
@@ -134,6 +146,13 @@ class output_ann {
       msg = {};
     }
     const resolved = new output_ann(null);
+    if (msg.number_output !== undefined) {
+      resolved.number_output = msg.number_output;
+    }
+    else {
+      resolved.number_output = 0
+    }
+
     if (msg.px_act_minicar !== undefined) {
       resolved.px_act_minicar = msg.px_act_minicar;
     }

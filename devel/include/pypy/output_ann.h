@@ -24,7 +24,8 @@ struct output_ann_
   typedef output_ann_<ContainerAllocator> Type;
 
   output_ann_()
-    : px_act_minicar(0.0)
+    : number_output(0)
+    , px_act_minicar(0.0)
     , py_act_minicar(0.0)
     , psi_act_minicar(0.0)
     , v_act_minicar(0.0)
@@ -32,7 +33,8 @@ struct output_ann_
     , epsi_act_minicar(0.0)  {
     }
   output_ann_(const ContainerAllocator& _alloc)
-    : px_act_minicar(0.0)
+    : number_output(0)
+    , px_act_minicar(0.0)
     , py_act_minicar(0.0)
     , psi_act_minicar(0.0)
     , v_act_minicar(0.0)
@@ -42,6 +44,9 @@ struct output_ann_
     }
 
 
+
+   typedef int32_t _number_output_type;
+  _number_output_type number_output;
 
    typedef float _px_act_minicar_type;
   _px_act_minicar_type px_act_minicar;
@@ -90,7 +95,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::pypy::output_ann_<ContainerAllocator1> & lhs, const ::pypy::output_ann_<ContainerAllocator2> & rhs)
 {
-  return lhs.px_act_minicar == rhs.px_act_minicar &&
+  return lhs.number_output == rhs.number_output &&
+    lhs.px_act_minicar == rhs.px_act_minicar &&
     lhs.py_act_minicar == rhs.py_act_minicar &&
     lhs.psi_act_minicar == rhs.psi_act_minicar &&
     lhs.v_act_minicar == rhs.v_act_minicar &&
@@ -152,12 +158,12 @@ struct MD5Sum< ::pypy::output_ann_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "8d2434489c16b0e308740b03741b3d7d";
+    return "721db5ffb080a547f879965214de1e32";
   }
 
   static const char* value(const ::pypy::output_ann_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x8d2434489c16b0e3ULL;
-  static const uint64_t static_value2 = 0x08740b03741b3d7dULL;
+  static const uint64_t static_value1 = 0x721db5ffb080a547ULL;
+  static const uint64_t static_value2 = 0xf879965214de1e32ULL;
 };
 
 template<class ContainerAllocator>
@@ -176,7 +182,8 @@ struct Definition< ::pypy::output_ann_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float32 px_act_minicar\n"
+    return "int32 number_output\n"
+"float32 px_act_minicar\n"
 "float32 py_act_minicar \n"
 "float32 psi_act_minicar\n"
 "float32 v_act_minicar\n"
@@ -200,6 +207,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.number_output);
       stream.next(m.px_act_minicar);
       stream.next(m.py_act_minicar);
       stream.next(m.psi_act_minicar);
@@ -224,6 +232,8 @@ struct Printer< ::pypy::output_ann_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::pypy::output_ann_<ContainerAllocator>& v)
   {
+    s << indent << "number_output: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.number_output);
     s << indent << "px_act_minicar: ";
     Printer<float>::stream(s, indent + "  ", v.px_act_minicar);
     s << indent << "py_act_minicar: ";

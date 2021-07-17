@@ -1,6 +1,6 @@
 # rospy_tutorial
 
-- Running on Ubuntu 18.04
-- Ros Melodic
-- Python 3.6.9
+- Running on Ubuntu 20.04
+- Ros Noetic
+- Python 3.8
 - Tensorflow 2.5.0

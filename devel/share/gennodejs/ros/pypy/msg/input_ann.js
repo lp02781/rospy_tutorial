@@ -18,6 +18,7 @@ class input_ann {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
+      this.number_input = null;
       this.v_minicar = null;
       this.dt_minicar = null;
       this.steering_minicar = null;
@@ -27,6 +28,12 @@ class input_ann {
       this.epsi_minicar = null;
     }
     else {
+      if (initObj.hasOwnProperty('number_input')) {
+        this.number_input = initObj.number_input
+      }
+      else {
+        this.number_input = 0;
+      }
       if (initObj.hasOwnProperty('v_minicar')) {
         this.v_minicar = initObj.v_minicar
       }
@@ -74,6 +81,8 @@ class input_ann {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type input_ann
+    // Serialize message field [number_input]
+    bufferOffset = _serializer.int32(obj.number_input, buffer, bufferOffset);
     // Serialize message field [v_minicar]
     bufferOffset = _serializer.float64(obj.v_minicar, buffer, bufferOffset);
     // Serialize message field [dt_minicar]
@@ -95,6 +104,8 @@ class input_ann {
     //deserializes a message object of type input_ann
     let len;
     let data = new input_ann(null);
+    // Deserialize message field [number_input]
+    data.number_input = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [v_minicar]
     data.v_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [dt_minicar]
@@ -113,7 +124,7 @@ class input_ann {
   }
 
   static getMessageSize(object) {
-    return 56;
+    return 60;
   }
 
   static datatype() {
@@ -123,12 +134,13 @@ class input_ann {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '093ce1ce8a57c4f6a17d4a1eac97b0d8';
+    return 'bc154e06ce5183a6baa17b949413ded1';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
+    int32 number_input
     float64 v_minicar
     float64 dt_minicar
     float64 steering_minicar
@@ -146,6 +158,13 @@ class input_ann {
       msg = {};
     }
     const resolved = new input_ann(null);
+    if (msg.number_input !== undefined) {
+      resolved.number_input = msg.number_input;
+    }
+    else {
+      resolved.number_input = 0
+    }
+
     if (msg.v_minicar !== undefined) {
       resolved.v_minicar = msg.v_minicar;
     }

@@ -24,7 +24,8 @@ struct input_ann_
   typedef input_ann_<ContainerAllocator> Type;
 
   input_ann_()
-    : v_minicar(0.0)
+    : number_input(0)
+    , v_minicar(0.0)
     , dt_minicar(0.0)
     , steering_minicar(0.0)
     , Lf_minicar(0.0)
@@ -33,7 +34,8 @@ struct input_ann_
     , epsi_minicar(0.0)  {
     }
   input_ann_(const ContainerAllocator& _alloc)
-    : v_minicar(0.0)
+    : number_input(0)
+    , v_minicar(0.0)
     , dt_minicar(0.0)
     , steering_minicar(0.0)
     , Lf_minicar(0.0)
@@ -44,6 +46,9 @@ struct input_ann_
     }
 
 
+
+   typedef int32_t _number_input_type;
+  _number_input_type number_input;
 
    typedef double _v_minicar_type;
   _v_minicar_type v_minicar;
@@ -95,7 +100,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::pypy::input_ann_<ContainerAllocator1> & lhs, const ::pypy::input_ann_<ContainerAllocator2> & rhs)
 {
-  return lhs.v_minicar == rhs.v_minicar &&
+  return lhs.number_input == rhs.number_input &&
+    lhs.v_minicar == rhs.v_minicar &&
     lhs.dt_minicar == rhs.dt_minicar &&
     lhs.steering_minicar == rhs.steering_minicar &&
     lhs.Lf_minicar == rhs.Lf_minicar &&
@@ -158,12 +164,12 @@ struct MD5Sum< ::pypy::input_ann_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "093ce1ce8a57c4f6a17d4a1eac97b0d8";
+    return "bc154e06ce5183a6baa17b949413ded1";
   }
 
   static const char* value(const ::pypy::input_ann_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x093ce1ce8a57c4f6ULL;
-  static const uint64_t static_value2 = 0xa17d4a1eac97b0d8ULL;
+  static const uint64_t static_value1 = 0xbc154e06ce5183a6ULL;
+  static const uint64_t static_value2 = 0xbaa17b949413ded1ULL;
 };
 
 template<class ContainerAllocator>
@@ -182,7 +188,8 @@ struct Definition< ::pypy::input_ann_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "float64 v_minicar\n"
+    return "int32 number_input\n"
+"float64 v_minicar\n"
 "float64 dt_minicar\n"
 "float64 steering_minicar\n"
 "float64 Lf_minicar\n"
@@ -207,6 +214,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
+      stream.next(m.number_input);
       stream.next(m.v_minicar);
       stream.next(m.dt_minicar);
       stream.next(m.steering_minicar);
@@ -232,6 +240,8 @@ struct Printer< ::pypy::input_ann_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::pypy::input_ann_<ContainerAllocator>& v)
   {
+    s << indent << "number_input: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.number_input);
     s << indent << "v_minicar: ";
     Printer<double>::stream(s, indent + "  ", v.v_minicar);
     s << indent << "dt_minicar: ";

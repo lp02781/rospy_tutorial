@@ -8,10 +8,11 @@ import struct
 
 
 class input_ann(genpy.Message):
-  _md5sum = "093ce1ce8a57c4f6a17d4a1eac97b0d8"
+  _md5sum = "bc154e06ce5183a6baa17b949413ded1"
   _type = "pypy/input_ann"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """float64 v_minicar
+  _full_text = """int32 number_input
+float64 v_minicar
 float64 dt_minicar
 float64 steering_minicar
 float64 Lf_minicar
@@ -19,8 +20,8 @@ float64 throttle_minicar
 float64 cte_minicar
 float64 epsi_minicar
 """
-  __slots__ = ['v_minicar','dt_minicar','steering_minicar','Lf_minicar','throttle_minicar','cte_minicar','epsi_minicar']
-  _slot_types = ['float64','float64','float64','float64','float64','float64','float64']
+  __slots__ = ['number_input','v_minicar','dt_minicar','steering_minicar','Lf_minicar','throttle_minicar','cte_minicar','epsi_minicar']
+  _slot_types = ['int32','float64','float64','float64','float64','float64','float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -30,7 +31,7 @@ float64 epsi_minicar
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       v_minicar,dt_minicar,steering_minicar,Lf_minicar,throttle_minicar,cte_minicar,epsi_minicar
+       number_input,v_minicar,dt_minicar,steering_minicar,Lf_minicar,throttle_minicar,cte_minicar,epsi_minicar
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -39,6 +40,8 @@ float64 epsi_minicar
     if args or kwds:
       super(input_ann, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
+      if self.number_input is None:
+        self.number_input = 0
       if self.v_minicar is None:
         self.v_minicar = 0.
       if self.dt_minicar is None:
@@ -54,6 +57,7 @@ float64 epsi_minicar
       if self.epsi_minicar is None:
         self.epsi_minicar = 0.
     else:
+      self.number_input = 0
       self.v_minicar = 0.
       self.dt_minicar = 0.
       self.steering_minicar = 0.
@@ -75,7 +79,7 @@ float64 epsi_minicar
     """
     try:
       _x = self
-      buff.write(_get_struct_7d().pack(_x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar))
+      buff.write(_get_struct_i7d().pack(_x.number_input, _x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -90,8 +94,8 @@ float64 epsi_minicar
       end = 0
       _x = self
       start = end
-      end += 56
-      (_x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar,) = _get_struct_7d().unpack(str[start:end])
+      end += 60
+      (_x.number_input, _x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar,) = _get_struct_i7d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -105,7 +109,7 @@ float64 epsi_minicar
     """
     try:
       _x = self
-      buff.write(_get_struct_7d().pack(_x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar))
+      buff.write(_get_struct_i7d().pack(_x.number_input, _x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -121,8 +125,8 @@ float64 epsi_minicar
       end = 0
       _x = self
       start = end
-      end += 56
-      (_x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar,) = _get_struct_7d().unpack(str[start:end])
+      end += 60
+      (_x.number_input, _x.v_minicar, _x.dt_minicar, _x.steering_minicar, _x.Lf_minicar, _x.throttle_minicar, _x.cte_minicar, _x.epsi_minicar,) = _get_struct_i7d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -131,9 +135,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_7d = None
-def _get_struct_7d():
-    global _struct_7d
-    if _struct_7d is None:
-        _struct_7d = struct.Struct("<7d")
-    return _struct_7d
+_struct_i7d = None
+def _get_struct_i7d():
+    global _struct_i7d
+    if _struct_i7d is None:
+        _struct_i7d = struct.Struct("<i7d")
+    return _struct_i7d
