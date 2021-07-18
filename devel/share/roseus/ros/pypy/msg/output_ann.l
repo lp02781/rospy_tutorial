@@ -62,18 +62,18 @@
    (+
     ;; int32 _number_output
     4
-    ;; float32 _px_act_minicar
-    4
-    ;; float32 _py_act_minicar
-    4
-    ;; float32 _psi_act_minicar
-    4
-    ;; float32 _v_act_minicar
-    4
-    ;; float32 _cte_act_minicar
-    4
-    ;; float32 _epsi_act_minicar
-    4
+    ;; float64 _px_act_minicar
+    8
+    ;; float64 _py_act_minicar
+    8
+    ;; float64 _psi_act_minicar
+    8
+    ;; float64 _v_act_minicar
+    8
+    ;; float64 _cte_act_minicar
+    8
+    ;; float64 _epsi_act_minicar
+    8
     ))
   (:serialize
    (&optional strm)
@@ -81,55 +81,55 @@
               (make-string-output-stream (send self :serialization-length)))))
      ;; int32 _number_output
        (write-long _number_output s)
-     ;; float32 _px_act_minicar
-       (sys::poke _px_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _py_act_minicar
-       (sys::poke _py_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _psi_act_minicar
-       (sys::poke _psi_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _v_act_minicar
-       (sys::poke _v_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _cte_act_minicar
-       (sys::poke _cte_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
-     ;; float32 _epsi_act_minicar
-       (sys::poke _epsi_act_minicar (send s :buffer) (send s :count) :float) (incf (stream-count s) 4)
+     ;; float64 _px_act_minicar
+       (sys::poke _px_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _py_act_minicar
+       (sys::poke _py_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _psi_act_minicar
+       (sys::poke _psi_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _v_act_minicar
+       (sys::poke _v_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _cte_act_minicar
+       (sys::poke _cte_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _epsi_act_minicar
+       (sys::poke _epsi_act_minicar (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
    ;; int32 _number_output
      (setq _number_output (sys::peek buf ptr- :integer)) (incf ptr- 4)
-   ;; float32 _px_act_minicar
-     (setq _px_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _py_act_minicar
-     (setq _py_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _psi_act_minicar
-     (setq _psi_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _v_act_minicar
-     (setq _v_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _cte_act_minicar
-     (setq _cte_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
-   ;; float32 _epsi_act_minicar
-     (setq _epsi_act_minicar (sys::peek buf ptr- :float)) (incf ptr- 4)
+   ;; float64 _px_act_minicar
+     (setq _px_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _py_act_minicar
+     (setq _py_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _psi_act_minicar
+     (setq _psi_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _v_act_minicar
+     (setq _v_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _cte_act_minicar
+     (setq _cte_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _epsi_act_minicar
+     (setq _epsi_act_minicar (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;;
    self)
   )
 
-(setf (get pypy::output_ann :md5sum-) "721db5ffb080a547f879965214de1e32")
+(setf (get pypy::output_ann :md5sum-) "489f76059d9865cd20e5ab0561f4ba38")
 (setf (get pypy::output_ann :datatype-) "pypy/output_ann")
 (setf (get pypy::output_ann :definition-)
       "int32 number_output
-float32 px_act_minicar
-float32 py_act_minicar 
-float32 psi_act_minicar
-float32 v_act_minicar
-float32 cte_act_minicar
-float32 epsi_act_minicar
+float64 px_act_minicar
+float64 py_act_minicar 
+float64 psi_act_minicar
+float64 v_act_minicar
+float64 cte_act_minicar
+float64 epsi_act_minicar
 
 ")
 
 
 
-(provide :pypy/output_ann "721db5ffb080a547f879965214de1e32")
+(provide :pypy/output_ann "489f76059d9865cd20e5ab0561f4ba38")
 
 

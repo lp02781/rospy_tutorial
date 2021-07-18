@@ -30,6 +30,8 @@ def callback(data):
 	#v, dt, steering, Lf, throttle, cte, epsi
 		#rospy.loginfo("################################################hoho")
 #if data.number_input==number_data+1 :
+		#	= data.number_input
+			
 		X_haha[0,0] = data.v_minicar
 		X_haha[0,1] = data.dt_minicar
 		X_haha[0,2] = data.steering_minicar
@@ -42,7 +44,11 @@ def callback(data):
 		#rospy.loginfo("##############################################haha")
 		#https://www.tensorflow.org/tutorials/keras/regression
 		Y_haha = model_new.predict(X_haha)
-	
+		
+		#number_process = data.number_input
+		
+		#print('number_process:', data.number_input)
+		
 		#px_act, py_act, psi_act, v_act, cte_act, epsi_act
 		data_predict.number_output 		= data.number_input
 		data_predict.px_act_minicar 		= Y_haha[0,0]
@@ -52,9 +58,9 @@ def callback(data):
 		data_predict.cte_act_minicar		= Y_haha[0,4]
 		data_predict.epsi_act_minicar	= Y_haha[0,5]
 		pub.publish(data_predict)
-	
+		
+		#print('number_process:', data.number_input)
 		#rospy.loginfo("######################################################hehe")
-		rospy.sleep(1)
 	
 def haha():
 	rospy.init_node('ann_minicar', anonymous=True)

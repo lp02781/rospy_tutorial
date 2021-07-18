@@ -77,17 +77,17 @@ class output_ann {
     // Serialize message field [number_output]
     bufferOffset = _serializer.int32(obj.number_output, buffer, bufferOffset);
     // Serialize message field [px_act_minicar]
-    bufferOffset = _serializer.float32(obj.px_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.px_act_minicar, buffer, bufferOffset);
     // Serialize message field [py_act_minicar]
-    bufferOffset = _serializer.float32(obj.py_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.py_act_minicar, buffer, bufferOffset);
     // Serialize message field [psi_act_minicar]
-    bufferOffset = _serializer.float32(obj.psi_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.psi_act_minicar, buffer, bufferOffset);
     // Serialize message field [v_act_minicar]
-    bufferOffset = _serializer.float32(obj.v_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.v_act_minicar, buffer, bufferOffset);
     // Serialize message field [cte_act_minicar]
-    bufferOffset = _serializer.float32(obj.cte_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.cte_act_minicar, buffer, bufferOffset);
     // Serialize message field [epsi_act_minicar]
-    bufferOffset = _serializer.float32(obj.epsi_act_minicar, buffer, bufferOffset);
+    bufferOffset = _serializer.float64(obj.epsi_act_minicar, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -98,22 +98,22 @@ class output_ann {
     // Deserialize message field [number_output]
     data.number_output = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [px_act_minicar]
-    data.px_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.px_act_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [py_act_minicar]
-    data.py_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.py_act_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [psi_act_minicar]
-    data.psi_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.psi_act_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [v_act_minicar]
-    data.v_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.v_act_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [cte_act_minicar]
-    data.cte_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.cte_act_minicar = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [epsi_act_minicar]
-    data.epsi_act_minicar = _deserializer.float32(buffer, bufferOffset);
+    data.epsi_act_minicar = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 28;
+    return 52;
   }
 
   static datatype() {
@@ -123,19 +123,19 @@ class output_ann {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '721db5ffb080a547f879965214de1e32';
+    return '489f76059d9865cd20e5ab0561f4ba38';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     int32 number_output
-    float32 px_act_minicar
-    float32 py_act_minicar 
-    float32 psi_act_minicar
-    float32 v_act_minicar
-    float32 cte_act_minicar
-    float32 epsi_act_minicar
+    float64 px_act_minicar
+    float64 py_act_minicar 
+    float64 psi_act_minicar
+    float64 v_act_minicar
+    float64 cte_act_minicar
+    float64 epsi_act_minicar
     
     `;
   }

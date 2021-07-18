@@ -8,19 +8,19 @@ import struct
 
 
 class output_ann(genpy.Message):
-  _md5sum = "721db5ffb080a547f879965214de1e32"
+  _md5sum = "489f76059d9865cd20e5ab0561f4ba38"
   _type = "pypy/output_ann"
   _has_header = False  # flag to mark the presence of a Header object
   _full_text = """int32 number_output
-float32 px_act_minicar
-float32 py_act_minicar 
-float32 psi_act_minicar
-float32 v_act_minicar
-float32 cte_act_minicar
-float32 epsi_act_minicar
+float64 px_act_minicar
+float64 py_act_minicar 
+float64 psi_act_minicar
+float64 v_act_minicar
+float64 cte_act_minicar
+float64 epsi_act_minicar
 """
   __slots__ = ['number_output','px_act_minicar','py_act_minicar','psi_act_minicar','v_act_minicar','cte_act_minicar','epsi_act_minicar']
-  _slot_types = ['int32','float32','float32','float32','float32','float32','float32']
+  _slot_types = ['int32','float64','float64','float64','float64','float64','float64']
 
   def __init__(self, *args, **kwds):
     """
@@ -75,7 +75,7 @@ float32 epsi_act_minicar
     """
     try:
       _x = self
-      buff.write(_get_struct_i6f().pack(_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar))
+      buff.write(_get_struct_i6d().pack(_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -90,8 +90,8 @@ float32 epsi_act_minicar
       end = 0
       _x = self
       start = end
-      end += 28
-      (_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar,) = _get_struct_i6f().unpack(str[start:end])
+      end += 52
+      (_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar,) = _get_struct_i6d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -105,7 +105,7 @@ float32 epsi_act_minicar
     """
     try:
       _x = self
-      buff.write(_get_struct_i6f().pack(_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar))
+      buff.write(_get_struct_i6d().pack(_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -121,8 +121,8 @@ float32 epsi_act_minicar
       end = 0
       _x = self
       start = end
-      end += 28
-      (_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar,) = _get_struct_i6f().unpack(str[start:end])
+      end += 52
+      (_x.number_output, _x.px_act_minicar, _x.py_act_minicar, _x.psi_act_minicar, _x.v_act_minicar, _x.cte_act_minicar, _x.epsi_act_minicar,) = _get_struct_i6d().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -131,9 +131,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_i6f = None
-def _get_struct_i6f():
-    global _struct_i6f
-    if _struct_i6f is None:
-        _struct_i6f = struct.Struct("<i6f")
-    return _struct_i6f
+_struct_i6d = None
+def _get_struct_i6d():
+    global _struct_i6d
+    if _struct_i6d is None:
+        _struct_i6d = struct.Struct("<i6d")
+    return _struct_i6d

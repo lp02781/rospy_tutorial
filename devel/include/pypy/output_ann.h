@@ -48,22 +48,22 @@ struct output_ann_
    typedef int32_t _number_output_type;
   _number_output_type number_output;
 
-   typedef float _px_act_minicar_type;
+   typedef double _px_act_minicar_type;
   _px_act_minicar_type px_act_minicar;
 
-   typedef float _py_act_minicar_type;
+   typedef double _py_act_minicar_type;
   _py_act_minicar_type py_act_minicar;
 
-   typedef float _psi_act_minicar_type;
+   typedef double _psi_act_minicar_type;
   _psi_act_minicar_type psi_act_minicar;
 
-   typedef float _v_act_minicar_type;
+   typedef double _v_act_minicar_type;
   _v_act_minicar_type v_act_minicar;
 
-   typedef float _cte_act_minicar_type;
+   typedef double _cte_act_minicar_type;
   _cte_act_minicar_type cte_act_minicar;
 
-   typedef float _epsi_act_minicar_type;
+   typedef double _epsi_act_minicar_type;
   _epsi_act_minicar_type epsi_act_minicar;
 
 
@@ -158,12 +158,12 @@ struct MD5Sum< ::pypy::output_ann_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "721db5ffb080a547f879965214de1e32";
+    return "489f76059d9865cd20e5ab0561f4ba38";
   }
 
   static const char* value(const ::pypy::output_ann_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x721db5ffb080a547ULL;
-  static const uint64_t static_value2 = 0xf879965214de1e32ULL;
+  static const uint64_t static_value1 = 0x489f76059d9865cdULL;
+  static const uint64_t static_value2 = 0x20e5ab0561f4ba38ULL;
 };
 
 template<class ContainerAllocator>
@@ -183,12 +183,12 @@ struct Definition< ::pypy::output_ann_<ContainerAllocator> >
   static const char* value()
   {
     return "int32 number_output\n"
-"float32 px_act_minicar\n"
-"float32 py_act_minicar \n"
-"float32 psi_act_minicar\n"
-"float32 v_act_minicar\n"
-"float32 cte_act_minicar\n"
-"float32 epsi_act_minicar\n"
+"float64 px_act_minicar\n"
+"float64 py_act_minicar \n"
+"float64 psi_act_minicar\n"
+"float64 v_act_minicar\n"
+"float64 cte_act_minicar\n"
+"float64 epsi_act_minicar\n"
 ;
   }
 
@@ -235,17 +235,17 @@ struct Printer< ::pypy::output_ann_<ContainerAllocator> >
     s << indent << "number_output: ";
     Printer<int32_t>::stream(s, indent + "  ", v.number_output);
     s << indent << "px_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.px_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.px_act_minicar);
     s << indent << "py_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.py_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.py_act_minicar);
     s << indent << "psi_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.psi_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.psi_act_minicar);
     s << indent << "v_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.v_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.v_act_minicar);
     s << indent << "cte_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.cte_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.cte_act_minicar);
     s << indent << "epsi_act_minicar: ";
-    Printer<float>::stream(s, indent + "  ", v.epsi_act_minicar);
+    Printer<double>::stream(s, indent + "  ", v.epsi_act_minicar);
   }
 };
 

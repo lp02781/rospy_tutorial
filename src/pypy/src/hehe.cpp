@@ -24,26 +24,27 @@ int main(int argc, char **argv)
 	sub	= n.subscribe("minicar/output_ann", 10, ann_cb);
 	 
 	while(ros::ok()){
-		sleep(0.1);
-		wkwk.number_input 		= number_data;
-		wkwk.v_minicar 	 		= 0.42146;
-		wkwk.dt_minicar 	 		= 0.1;
-		wkwk.steering_minicar 	= 0.35197;
-		wkwk.Lf_minicar 		    = 0.25;
-		wkwk.throttle_minicar 	= 1;
-		wkwk.cte_minicar 			= 0.07659;
-		wkwk.epsi_minicar 		= 0.5903;
+		while(number_predict != number_data){
+			wkwk.number_input 		= number_data;
+			wkwk.v_minicar 	 		= 0.42146;
+			wkwk.dt_minicar 	 		= 0.1;
+			wkwk.steering_minicar 	= 0.35197;
+			wkwk.Lf_minicar 		    = 0.25;
+			wkwk.throttle_minicar 	= 1;
+			wkwk.cte_minicar 			= 0.07659;
+			wkwk.epsi_minicar 		= 0.5903;
 		
-		pub.publish(wkwk);	
-		//cout<<"[CPP] I send "<<wkwk<<endl;
-		ros::spinOnce();
-		//while(number_predict != number_data){
-		//		ros::spinOnce();
-		//}
-		cout<< number_predict<<endl;
-		cout<< number_data<<endl;
+			pub.publish(wkwk);	
+			cout<<"[CPP] I send "<<wkwk<<endl;
+			ros::spinOnce();
+			//cout<< "number_data_loop: "<<wkwk.number_input <<endl;
+			sleep(1);
+		}
+		
+		//cout<< "number_predict: "<<number_predict<<endl;
+		//cout<< "number_data: "<<number_data<<endl;
 		number_data++;
-		//cout<<"[CPP] I got "<<number_predict<<endl<<px_act_predict<<endl<<py_act_predict<<endl<<psi_act_predict<<endl<<v_act_predict<<endl<<cte_act_predict<<endl<<epsi_act_predict<<endl<<endl;
+		cout<<"[CPP] I got "<<number_predict<<endl<<px_act_predict<<endl<<py_act_predict<<endl<<psi_act_predict<<endl<<v_act_predict<<endl<<cte_act_predict<<endl<<epsi_act_predict<<endl<<endl;
 		//cout<<"hehe"<<endl;
 		sleep(1);
 	}
